@@ -1,1 +1,41 @@
 
+% Function describing yield loss (example non-linear function)
+Z = y = 0.1∙(-x_4^2+ 0.4x_11^2-0.1x_4∙x_11 )
+
+% % Display of data matrix
+disp('Matrix X1:');
+disp(X1);
+disp('Matrix X2:');
+disp(X2);
+disp('Yield loss matrix Z:');
+disp(Z);
+% Creation of a 3D area diagram of yield losses
+figure;
+surf(X1, X2, Z);
+
+% Addition of title and axis labels
+title('Amount of yield loss from carrot roots');
+xlabel('Axis X', 'FontSize', 12, 'FontWeight', 'bold', 'FontName', 'Arial');
+ylabel('Axis Y', 'FontSize', 12, 'FontWeight', 'bold', 'FontName', 'Arial');
+zlabel('Axis Z', 'FontSize', 12, 'FontWeight', 'bold', 'FontName', 'Arial');
+
+% Rotation of the X-axis label by 45 degrees
+hx = xlabel('Height of heading [mm]');
+set(hx, 'Rotation', 13);
+
+% % Y-axis label rotation -30 degrees
+hy = ylabel('Wysokość wystawania główki [mm]');
+set(hy, 'Rotation', -25);
+
+
+% % Rotation of Z-axis label by 90 degrees
+hz = zlabel(['Yield losses' ...
+    'carrot roots [%]']);
+set(hz, 'Rotation', 90);
+
+% Adding a grid to the graph
+grid on;
+
+% Adding colour to the surface
+shading interp;
+colorbar;
