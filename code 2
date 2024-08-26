@@ -1,1 +1,58 @@
+% Creating a neural network with 12 neurons in the hidden layer
+hiddenLayerSize = 12;
+net = feedforwardnet(hiddenLayerSize);
 
+% Division of data into training, validation and test sets
+net.divideParam.trainRatio = 60/100; % 60% of data for training
+net.divideParam.valRatio = 20/100;   % 20% data for validation
+net.divideParam.testRatio = 20/100;  % 20% danych do testowania
+
+% % Neural network training
+[net, tr] = train(net, X, Y);
+
+% Display of yield loss information
+disp('Carrot root yield losses.');
+% Prediction of values for the test set
+testX = X(:, tr.testInd);
+testY = Y(tr.testInd);
+testPredY = net(testX);
+
+% Calculation of the mean square error (MSE) for a test set
+testMSE = mse(testY, testPredY);
+
+% Display of error
+disp('Mean squared error (MSE) on the test set:');
+disp(testMSE);
+% % Visualisation of predicted and actual values
+figure;
+plot(testY, 'bo-', 'DisplayName', 'Real values');
+hold on;
+plot(testPredY, 'r*-', 'DisplayName', 'Predicted values');
+legend;
+xlabel('Trial index');
+ylabel('Carrot root yield loss (kg)');
+title('Comparison of real and predicted values');
+grid on;
+
+% % Error graph
+errors = testY - testPredY;
+figure;
+bar(errors);
+xlabel('Trial index');
+ylabel('Error (kg)');
+title('Prediction errors');
+grid on;
+% % Creating a neural network with a different activation function and number of neurons
+hiddenLayerSize = [10 2]; % three hidden layers
+net = feedforwardnet(hiddenLayerSize, 'trainlm'); %% we use the Levenberg-Marquardt function
+
+% % Neural network training
+[net, tr] = train(net, X, Y);
+
+% % Prediction and evaluation as before
+testX = X(:, tr.testInd);
+testY = Y(tr.testInd);
+testPredY = net(testX);
+testMSE = mse(testY, testPredY);
+disp('Mean squared error (MSE) on the test set');
+disp(testMSE);
