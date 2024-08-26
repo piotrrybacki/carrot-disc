@@ -1,1 +1,27 @@
 
+% Creating an area diagram
+figure;
+surf(X, Y, Z);
+
+% Rotation of the X-axis label by 45 degrees
+hx = xlabel('Stunting height [mm]');
+set(hx, 'Rotation', 28);
+
+% % Y-axis label rotation -30 degrees
+hy = ylabel('Head projection height [mm]');
+set(hy, 'Rotation', -21);
+
+% % Rotation of Z-axis label by 90 degrees
+hz = zlabel(['Yield losses ' ...
+    'carrot roots [%]']);
+set(hz, 'Rotation', 90);
+
+% % Personalisation of the graph
+title('Economic loss graph');
+xlabel('Height of the head above the soil surface [mm]');
+ylabel('Heading height of carrot root [mm]');
+zlabel('Prediction of economic losses [t/ha]');
+grid on;
+shading interp;
+colorbar;
+view(45, 30);
